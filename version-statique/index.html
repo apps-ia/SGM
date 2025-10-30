@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NOIA_SGM - Secrétaire Générale de Mairie numérique">
+    <meta name="author" content="NOIA_SGM">
+    <title>NOIA_SGM - Secrétaire Générale de Mairie</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">
+                    <span class="logo-icon">🏛️</span>
+                    NOIA_SGM
+                </h1>
+                <p class="subtitle">Secrétaire Générale de Mairie numérique</p>
+            </div>
+            <div class="header-actions">
+                <button id="theme-toggle" class="icon-button" title="Basculer mode sombre/clair" aria-label="Basculer le thème">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <button id="new-conversation" class="icon-button" title="Nouvelle conversation" aria-label="Nouvelle conversation">
+                    <span>➕</span>
+                </button>
+                <button id="history-toggle" class="icon-button" title="Historique" aria-label="Afficher l'historique">
+                    <span>📋</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Sidebar (Historique) -->
+            <aside id="sidebar" class="sidebar hidden">
+                <div class="sidebar-header">
+                    <h2>Historique des conversations</h2>
+                    <button id="close-sidebar" class="icon-button">✕</button>
+                </div>
+                <div id="conversation-list" class="conversation-list">
+                    <!-- Liste des conversations sera générée dynamiquement -->
+                </div>
+                <div class="sidebar-footer">
+                    <button id="clear-history" class="btn-secondary">
+                        🗑️ Effacer tout l'historique
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Chat Area -->
+            <div class="chat-container">
+                <!-- Welcome Message -->
+                <div id="welcome-message" class="welcome-message">
+                    <div class="welcome-content">
+                        <h2>Bienvenue sur NOIA_SGM</h2>
+                        <p class="welcome-text">
+                            Je suis votre Secrétaire Générale de Mairie numérique, conçue pour assister
+                            les petites collectivités dans la gestion administrative, juridique, financière,
+                            RH et numérique.
+                        </p>
+                        <div class="capabilities">
+                            <h3>Mes domaines de compétence :</h3>
+                            <ul>
+                                <li><strong>Administration générale</strong> : délibérations, convocations, quorum, PV, arrêtés</li>
+                                <li><strong>Finances publiques</strong> : imputation M57A, équilibre budgétaire, FCTVA</li>
+                                <li><strong>Ressources humaines</strong> : carrières, temps de travail, rémunérations, IFSE</li>
+                                <li><strong>Juridique</strong> : conformité des actes, marchés publics, délégations</li>
+                                <li><strong>Numérique</strong> : outils bureautiques, RGPD, organisation documentaire</li>
+                            </ul>
+                        </div>
+                        <p class="welcome-note">
+                            💡 Posez-moi vos questions et je vous fournirai des réponses structurées
+                            avec références juridiques, analyse et propositions d'actes.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Messages Container -->
+                <div id="messages-container" class="messages-container">
+                    <!-- Les messages seront ajoutés ici dynamiquement -->
+                </div>
+
+                <!-- Loading Indicator -->
+                <div id="loading" class="loading hidden">
+                    <div class="loading-spinner"></div>
+                    <span>NOIA_SGM réfléchit...</span>
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-area">
+                    <div class="input-container">
+                        <textarea
+                            id="user-input"
+                            placeholder="Posez votre question administrative..."
+                            rows="3"
+                            aria-label="Saisir votre question"
+                        ></textarea>
+                        <button id="send-button" class="send-button" aria-label="Envoyer le message">
+                            <span class="send-icon">📤</span>
+                        </button>
+                    </div>
+                    <div class="input-info">
+                        <span class="char-count">
+                            <span id="char-count">0</span> / 2000 caractères
+                        </span>
+                        <span class="input-hint">
+                            Appuyez sur Ctrl+Entrée pour envoyer
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>
+                ⚖️ Sources officielles : Légifrance, DGCL, DGFiP, CNFPT, Service-public.fr
+                <br>
+                <small>
+                    NOIA_SGM v1.0 - Tous les actes doivent être validés par le secrétaire général de mairie avant signature
+                </small>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

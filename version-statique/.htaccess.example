@@ -1,0 +1,148 @@
+# Exemple de fichier .htaccess pour protéger NOIA_SGM
+# Renommer en .htaccess pour activer
+
+# ============================================
+# OPTION 1 : Protection par mot de passe
+# ============================================
+
+# Décommenter les lignes ci-dessous pour activer
+# AuthType Basic
+# AuthName "Accès restreint - NOIA_SGM"
+# AuthUserFile /chemin/absolu/vers/.htpasswd
+# Require valid-user
+
+# Pour créer le fichier .htpasswd :
+# 1. Via générateur en ligne : https://www.web2generators.com/apache-tools/htpasswd-generator
+# 2. Copier le contenu dans un fichier .htpasswd
+# 3. Uploader .htpasswd dans un dossier NON accessible par le web
+# 4. Mettre le chemin absolu ci-dessus
+
+# ============================================
+# OPTION 2 : Restriction par adresse IP
+# ============================================
+
+# Autoriser uniquement certaines IP
+# Décommenter et adapter les lignes ci-dessous
+
+# Order Deny,Allow
+# Deny from all
+# Allow from 123.456.789.0  # Remplacer par votre IP
+# Allow from 98.765.432.0   # Ajouter d'autres IP si nécessaire
+
+# ============================================
+# OPTION 3 : Combinaison IP + Mot de passe
+# ============================================
+
+# Autoriser certaines IP SANS mot de passe
+# Les autres IP doivent s'authentifier
+
+# AuthType Basic
+# AuthName "Accès restreint - NOIA_SGM"
+# AuthUserFile /chemin/absolu/vers/.htpasswd
+# Require valid-user
+#
+# Order Deny,Allow
+# Deny from all
+# Allow from 123.456.789.0  # IP autorisée sans mot de passe
+# Satisfy Any
+
+# ============================================
+# Sécurité générale (RECOMMANDÉ)
+# ============================================
+
+# Désactiver l'affichage du listing des répertoires
+Options -Indexes
+
+# Protéger le fichier .htaccess lui-même
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Protéger le fichier config.js (facultatif mais recommandé)
+# Attention : Si vous protégez config.js, l'application ne fonctionnera plus !
+# À utiliser uniquement si vous déplacez la clé API ailleurs
+# <Files config.js>
+#     Order allow,deny
+#     Deny from all
+# </Files>
+
+# Empêcher l'accès direct aux fichiers sensibles
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql|env)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Headers de sécurité
+<IfModule mod_headers.c>
+    # Protéger contre le clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+
+    # Protéger contre le XSS
+    Header set X-XSS-Protection "1; mode=block"
+
+    # Empêcher le sniffing MIME
+    Header set X-Content-Type-Options "nosniff"
+
+    # Politique de référent
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # HSTS (HTTPS uniquement)
+    # Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# ============================================
+# Performance et cache (OPTIONNEL)
+# ============================================
+
+# Cache pour les fichiers statiques
+<IfModule mod_expires.c>
+    ExpiresActive On
+
+    # HTML et texte
+    ExpiresByType text/html "access plus 1 hour"
+    ExpiresByType text/plain "access plus 1 hour"
+
+    # CSS et JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+
+    # Images
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+
+    # Fonts
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
+</IfModule>
+
+# Compression (réduire la bande passante)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript
+</IfModule>
+
+# ============================================
+# Notes importantes
+# ============================================
+
+# Pour obtenir votre adresse IP :
+# - Aller sur https://www.whatismyip.com/
+# - Noter l'adresse IP affichée
+
+# Pour créer un fichier .htpasswd :
+# 1. Générateur : https://www.web2generators.com/apache-tools/htpasswd-generator
+# 2. Utilisateur : admin (par exemple)
+# 3. Mot de passe : choisir un mot de passe fort
+# 4. Copier la ligne générée
+# 5. Créer un fichier .htpasswd avec cette ligne
+# 6. Uploader en dehors du dossier web public
+
+# Pour trouver le chemin absolu :
+# Créer un fichier info.php avec :
+# <?php echo __DIR__; ?>
+# Uploader et ouvrir dans le navigateur
+# Le chemin s'affiche
+# Supprimer info.php après

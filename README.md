@@ -6,8 +6,30 @@ Application web sécurisée d'assistance administrative pour les secrétaires g�
 
 **🌐 Domaine de production** : https://noia.erelys.fr
 
-## 📖 Guides de déploiement
+## 📦 Deux versions disponibles
 
+### 🚀 Version Statique Simplifiée (RECOMMANDÉE pour débutants)
+
+**Installation ultra-simple** : Upload FTP et c'est prêt !
+
+- ✅ Pas de Python, pas de serveur compliqué
+- ✅ Fonctionne sur tout hébergement (OVH mutualisé, etc.)
+- ✅ Installation en 3 étapes
+- ⚠️ Clé API visible dans le code (avec protections recommandées)
+
+📂 **Dossier** : [`version-statique/`](version-statique/)
+📖 **Guide** : [GUIDE_INSTALLATION_SIMPLE.md](version-statique/GUIDE_INSTALLATION_SIMPLE.md)
+
+### 🔒 Version Complète avec Backend (Sécurité maximale)
+
+**Installation technique** : Serveur Python + Nginx + systemd
+
+- ✅ Sécurité maximale (clé API protégée sur le serveur)
+- ✅ Contrôle d'accès et rate limiting possibles
+- ✅ Logs et monitoring complets
+- ⚠️ Nécessite un VPS ou serveur dédié avec SSH
+
+📖 **Guides de déploiement** :
 - **[DEPLOY_NOIA_ERELYS.md](DEPLOY_NOIA_ERELYS.md)** - Guide rapide pour noia.erelys.fr
 - **[DEPLOY_FILEZILLA.md](DEPLOY_FILEZILLA.md)** - Guide complet de déploiement via FileZilla
 - **[QUICK_START.md](QUICK_START.md)** - Démarrage rapide pour développement local
