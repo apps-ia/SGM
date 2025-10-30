@@ -1,0 +1,36 @@
+# Fichier de service systemd pour NOIA_SGM
+# À copier dans /etc/systemd/system/noia-sgm.service
+
+[Unit]
+Description=NOIA_SGM - Secrétaire Générale de Mairie numérique
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/noia_sgm/backend
+Environment="PATH=/var/www/noia_sgm/backend/venv/bin"
+ExecStart=/var/www/noia_sgm/backend/venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2
+
+# Redémarrage automatique en cas d'échec
+Restart=always
+RestartSec=10
+
+# Limites de ressources
+LimitNOFILE=65536
+
+# Logs
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=noia-sgm
+
+# Sécurité
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/noia_sgm/backend
+
+[Install]
+WantedBy=multi-user.target

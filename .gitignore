@@ -1,0 +1,70 @@
+# NOIA_SGM .gitignore
+
+# Environnement Python
+backend/venv/
+backend/.venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.pyd
+backend/.Python
+backend/pip-log.txt
+backend/pip-delete-this-directory.txt
+
+# Fichiers d'environnement (contiennent des secrets)
+backend/.env
+backend/.env.local
+backend/.env.production
+
+# Logs
+*.log
+backend/logs/
+logs/
+
+# Base de données (si utilisée)
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Fichiers temporaires
+*.tmp
+*.bak
+*.cache
+
+# Distribution / packaging
+backend/dist/
+backend/build/
+backend/*.egg-info/
+
+# Tests
+backend/.pytest_cache/
+backend/.coverage
+backend/htmlcov/
+
+# Nginx logs
+*.access.log
+*.error.log
+
+# Certificats SSL (ne jamais commiter)
+*.key
+*.crt
+*.pem
+
+# Fichiers système
+Thumbs.db
+.directory
+
+# Node modules (si utilisé)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,57 @@
+# Docker Compose pour NOIA_SGM (optionnel)
+# Usage: docker-compose up -d
+
+version: '3.8'
+
+services:
+  noia-sgm:
+    build: .
+    container_name: noia-sgm
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - backend/.env
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+    volumes:
+      # Optionnel : monter les logs
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - noia-network
+
+  # Nginx (optionnel, pour le reverse proxy)
+  nginx:
+    image: nginx:alpine
+    container_name: noia-sgm-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./frontend:/usr/share/nginx/html:ro
+      # Volumes pour SSL (à adapter)
+      # - ./ssl/certs:/etc/nginx/ssl:ro
+    depends_on:
+      - noia-sgm
+    networks:
+      - noia-network
+
+networks:
+  noia-network:
+    driver: bridge
+
+# Commandes utiles :
+# docker-compose up -d           # Démarrer
+# docker-compose down            # Arrêter
+# docker-compose logs -f         # Voir les logs
+# docker-compose restart         # Redémarrer
+# docker-compose ps              # Status
