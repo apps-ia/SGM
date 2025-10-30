@@ -4,6 +4,14 @@
 
 Application web sécurisée d'assistance administrative pour les secrétaires généraux de mairie, agents territoriaux et élus de communes de moins de 3 500 habitants.
 
+**🌐 Domaine de production** : https://noia.erelys.fr
+
+## 📖 Guides de déploiement
+
+- **[DEPLOY_NOIA_ERELYS.md](DEPLOY_NOIA_ERELYS.md)** - Guide rapide pour noia.erelys.fr
+- **[DEPLOY_FILEZILLA.md](DEPLOY_FILEZILLA.md)** - Guide complet de déploiement via FileZilla
+- **[QUICK_START.md](QUICK_START.md)** - Démarrage rapide pour développement local
+
 ## 🎯 Description
 
 NOIA_SGM est une interface web épurée intégrant l'API OpenAI GPT-4/5 pour fournir une assistance administrative structurée, juridique, financière, RH et numérique aux petites collectivités territoriales.
